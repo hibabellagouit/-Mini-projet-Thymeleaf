@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <title>Équipements</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-50 text-slate-900">
+<div class="max-w-5xl mx-auto p-6 space-y-4">
+  <div class="flex items-center justify-between">
+    <h1 class="text-xl font-semibold">Équipements</h1>
+    <a th:href="@{/equipements/signup}" class="px-3 py-2 bg-indigo-600 text-white rounded-lg">Ajouter</a>
+  </div>
+
+  <table class="min-w-full bg-white rounded-lg shadow ring-1 ring-slate-200 overflow-hidden">
+    <thead class="bg-slate-50">
+      <tr>
+        <th class="px-4 py-2 text-left">ID</th>
+        <th class="px-4 py-2 text-left">Code</th>
+        <th class="px-4 py-2 text-left">Type</th>
+        <th class="px-4 py-2 text-left">Criticité</th>
+        <th class="px-4 py-2 text-left">Site</th>
+        <th class="px-4 py-2 text-left">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr th:each="e : ${equipements}" class="border-t">
+        <td class="px-4 py-2" th:text="${e.id}">1</td>
+        <td class="px-4 py-2" th:text="${e.code}">EQ-001</td>
+        <td class="px-4 py-2" th:text="${e.type}">Type</td>
+        <td class="px-4 py-2" th:text="${e.criticite}">Moyenne</td>
+        <td class="px-4 py-2" th:text="${e.site}">Site</td>
+        <td class="px-4 py-2 space-x-2">
+          <a th:href="@{'/equipements/edit/' + ${e.id}}" class="text-indigo-600">Modifier</a>
+          <a th:href="@{'/equipements/delete/' + ${e.id}}" class="text-red-600"
+             onclick="return confirm('Supprimer cet équipement ?');">Supprimer</a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p><a th:href="@{/dashboard}" class="text-slate-600">← Retour au dashboard</a></p>
+</div>
+</body>
+</html>

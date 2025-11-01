@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <title>Techniciens</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-50 text-slate-900">
+<div class="max-w-5xl mx-auto p-6 space-y-4">
+  <div class="flex items-center justify-between">
+    <h1 class="text-xl font-semibold">Techniciens</h1>
+    <a th:href="@{/techniciens/signup}" class="px-3 py-2 bg-indigo-600 text-white rounded-lg">Ajouter</a>
+  </div>
+
+  <table class="min-w-full bg-white rounded-lg shadow ring-1 ring-slate-200 overflow-hidden">
+    <thead class="bg-slate-50">
+      <tr>
+        <th class="px-4 py-2 text-left">ID</th>
+        <th class="px-4 py-2 text-left">Nom</th>
+        <th class="px-4 py-2 text-left">Spécialité</th>
+        <th class="px-4 py-2 text-left">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr th:each="t : ${techniciens}" class="border-t">
+        <td class="px-4 py-2" th:text="${t.id}">1</td>
+        <td class="px-4 py-2" th:text="${t.nom}">Doe</td>
+        <td class="px-4 py-2" th:text="${t.specialite}">Mécanique</td>
+        <td class="px-4 py-2 space-x-2">
+          <a th:href="@{'/techniciens/edit/' + ${t.id}}" class="text-indigo-600">Modifier</a>
+          <a th:href="@{'/techniciens/delete/' + ${t.id}}" class="text-red-600" onclick="return confirm('Supprimer ce technicien ?');">Supprimer</a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p><a th:href="@{/dashboard}" class="text-slate-600">← Retour au dashboard</a></p>
+</div>
+</body>
+</html>

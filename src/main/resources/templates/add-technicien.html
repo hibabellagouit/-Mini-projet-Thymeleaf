@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <title>Ajouter Technicien</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-50 text-slate-900">
+<div class="max-w-lg mx-auto p-6 space-y-4">
+  <h1 class="text-xl font-semibold">Nouveau technicien</h1>
+  <form th:action="@{/techniciens/addTechnicien}" method="post" th:object="${technicien}" class="space-y-4 bg-white p-4 rounded-lg shadow ring-1 ring-slate-200">
+    <div>
+      <label class="block text-sm">Nom</label>
+      <input name="nom" class="w-full border rounded px-3 py-2" required />
+    </div>
+    <div>
+      <label class="block text-sm">Spécialité</label>
+      <input name="specialite" class="w-full border rounded px-3 py-2" required />
+    </div>
+    <div class="flex gap-3">
+      <button type="submit" class="px-3 py-2 bg-indigo-600 text-white rounded">Enregistrer</button>
+      <a th:href="@{/techniciens}" class="px-3 py-2 bg-slate-100 rounded">Annuler</a>
+    </div>
+  </form>
+</div>
+</body>
+</html>

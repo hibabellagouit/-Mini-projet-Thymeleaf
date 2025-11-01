@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <title>Ajouter Intervention</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-50 text-slate-900">
+<div class="max-w-2xl mx-auto p-6 space-y-4">
+  <h1 class="text-xl font-semibold">Nouvelle intervention</h1>
+  <form th:action="@{/interventions/add}" method="post" th:object="${intervention}" class="space-y-4 bg-white p-4 rounded-lg shadow ring-1 ring-slate-200">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div>
+        <label class="block text-sm">Équipement</label>
+        <select name="equipementId" class="w-full border rounded px-3 py-2" required>
+          <option th:each="e : ${equipements}" th:value="${e.id}" th:text="${e.code}"></option>
+        </select>
+      </div>
+      <div>
+        <label class="block text-sm">Technicien</label>
+        <select name="technicienId" class="w-full border rounded px-3 py-2" required>
+          <option th:each="t : ${techniciens}" th:value="${t.id}" th:text="${t.nom}"></option>
+        </select>
+      </div>
+      <div>
+        <label class="block text-sm">Date ouverture</label>
+        <input type="date" name="dateOuverture" class="w-full border rounded px-3 py-2" required />
+      </div>
+      <div>
+        <label class="block text-sm">Date clôture</label>
+        <input type="date" name="dateCloture" class="w-full border rounded px-3 py-2" required />
+      </div>
+      <div>
+        <label class="block text-sm">Priorité</label>
+        <select name="priorite" class="w-full border rounded px-3 py-2" required>
+          <option value="BASSE">BASSE</option>
+          <option value="MOYENNE">MOYENNE</option>
+          <option value="HAUTE">HAUTE</option>
+        </select>
+      </div>
+      <div>
+        <label class="block text-sm">Statut</label>
+        <select name="statut" class="w-full border rounded px-3 py-2" required>
+          <option value="OUVERT">OUVERT</option>
+          <option value="EN_COURS">EN_COURS</option>
+          <option value="RESOLU">RESOLU</option>
+        </select>
+      </div>
+    </div>
+    <div class="flex gap-3">
+      <button type="submit" class="px-3 py-2 bg-indigo-600 text-white rounded">Enregistrer</button>
+      <a th:href="@{/interventions}" class="px-3 py-2 bg-slate-100 rounded">Annuler</a>
+    </div>
+  </form>
+</div>
+</body>
+</html>

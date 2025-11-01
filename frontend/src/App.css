@@ -1,0 +1,4 @@
+/* utilities for demo */
+.table { width: 100%; border-collapse: collapse; }
+.table th, .table td { padding: 0.5rem 1rem; text-align: left; }
+.card { border-radius: 0.5rem; border: 1px solid hsl(214.3 31.8% 91.4%); background: white; }

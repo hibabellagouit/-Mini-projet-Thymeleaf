@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <title>Interventions</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-50 text-slate-900">
+<div class="max-w-6xl mx-auto p-6 space-y-4">
+  <div class="flex items-center justify-between">
+    <h1 class="text-xl font-semibold">Interventions</h1>
+    <a th:href="@{/interventions/signup}" class="px-3 py-2 bg-indigo-600 text-white rounded-lg">Ajouter</a>
+  </div>
+
+  <table class="min-w-full bg-white rounded-lg shadow ring-1 ring-slate-200 overflow-hidden">
+    <thead class="bg-slate-50">
+      <tr>
+        <th class="px-4 py-2 text-left">Équipement</th>
+        <th class="px-4 py-2 text-left">Technicien</th>
+        <th class="px-4 py-2 text-left">Date ouverture</th>
+        <th class="px-4 py-2 text-left">Date clôture</th>
+        <th class="px-4 py-2 text-left">Priorité</th>
+        <th class="px-4 py-2 text-left">Statut</th>
+        <th class="px-4 py-2 text-left">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr th:each="it : ${interventions}" class="border-t">
+        <td class="px-4 py-2" th:text="${it.equipement != null ? it.equipement.code : '—'}">EQ</td>
+        <td class="px-4 py-2" th:text="${it.technicien != null ? it.technicien.nom : '—'}">Tech</td>
+        <td class="px-4 py-2" th:text="${#temporals.format(it.dateOuverture, 'yyyy-MM-dd')}">2025-01-01</td>
+        <td class="px-4 py-2" th:text="${it.dateCloture != null ? #temporals.format(it.dateCloture, 'yyyy-MM-dd') : '—'}">—</td>
+        <td class="px-4 py-2" th:text="${it.priorite}">MOYENNE</td>
+        <td class="px-4 py-2" th:text="${it.statut}">OUVERT</td>
+        <td class="px-4 py-2 space-x-2">
+          <a th:href="@{'/interventions/edit'(equipementId=${it.equipement.id},technicienId=${it.technicien.id},dateOuverture=${#temporals.format(it.dateOuverture,'yyyy-MM-dd')})}" class="text-indigo-600">Modifier</a>
+          <a th:href="@{'/interventions/delete'(equipementId=${it.equipement.id},technicienId=${it.technicien.id},dateOuverture=${#temporals.format(it.dateOuverture,'yyyy-MM-dd')})}"
+             class="text-red-600" onclick="return confirm('Supprimer cette intervention ?');">Supprimer</a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p><a th:href="@{/dashboard}" class="text-slate-600">← Retour au dashboard</a></p>
+</div>
+</body>
+</html>
